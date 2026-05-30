@@ -1,0 +1,30 @@
+Задание 5. Сконфигурируйте ansible на сервере BR-SRV:
+
+BR-SRV
+apt install ansible sshpass -y
+mkdir -p /etc/ansible
+nano /etc/ansible/ansible.cfg
+[defaults]
+host_key_checking=False
+nano /etc/ansible/hosts
+На HQ-RTR и BR-RTR:
+apt install openssh-server
+На HQ-CLI:
+apt install openssh-server
+useradd -m -s /bin/bash sshuser -U
+usermod -aG sudo sshuser
+passwd sshuser
+P@ssw0rd
+BR-SRV:
+ansible all -m ping
+Задание 6. Разверните веб приложение в docker на сервере BR-SRV:
+BR-SRV
+apt install docker.io docker-compose -y
+Скачиваем образ Additional.iso и извлекаем его через Xarchiver
+В проводнике папку Additional перетаскиваем в /root
+docker image load -i /root/Additional/docker/site_latest.tar
+docker image load -i /root/Additional/docker/mariadb_latest.tar
+docker images
+mkdir testapp
+cd testapp/
+nano docker-compose.yaml
